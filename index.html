@@ -3,10 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Project</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <script src="script.js"></script>
+    <div id="app">
+      <div id="master">
+        <sidebar>
+          <div id="topSidebar">
+            <h1 style="padding-top: 50px; padding-left: 50px">My Library</h1>
+            <h4 style="color: grey; padding-top: 20px; padding-left: 50px">
+              Menu
+            </h4>
+            <span> </span>
+          </div>
+        </sidebar>
+        <header></header>
+        <main>
+          <div id="card">
+            <div id="title"></div>
+            <div id="summary"></div>
+            <div id="author"></div>
+            <div id="pages"></div>
+            <div id="status"></div>
+          </div>
+        </main>
+      </div>
+    </div>
   </body>
+  <script src="script.js"></script>
 </html>

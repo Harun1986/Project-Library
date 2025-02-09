@@ -1,0 +1,84 @@
+h1,
+h4,
+span {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  background-image: linear-gradient(
+    rgba(240, 239, 233, 255),
+    rgba(240, 239, 233, 255)
+  );
+  margin: 0 auto;
+  height: 100vh;
+  width: 90vw;
+  display: grid;
+}
+
+#master {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  background: rgba(255, 255, 255, 255);
+  margin: 40px;
+  border-radius: 40px;
+}
+
+header {
+  display: grid;
+  grid-row: 1 / 5;
+  grid-column: 2 / 5;
+  background: rgba(234, 230, 215, 255);
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 100px;
+}
+
+main {
+  display: grid;
+  grid-row: 5 / 9;
+  grid-column: 2 / 5;
+  background: rgba(255, 255, 255, 255);
+  border-bottom-right-radius: 40px;
+}
+
+sidebar {
+  display: grid;
+  grid-row: 1 / 9;
+  grid-column: 1 / 2;
+  background: rgba(255, 255, 255, 255);
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+}
+
+#iconContainer {
+  height: 30px;
+  width: 30px;
+  background: rgba(241, 241, 241, 255);
+  border-radius: 10px;
+}
+
+#navContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 40px;
+}
+
+#iconContainer {
+  margin: 10px;
+}
+
+#iconContainer:hover {
+  background: rgba(167, 183, 175, 255);
+}
+
+svg {
+  fill: grey;
+  margin: 5px;
+}
+
+svg:hover {
+  fill: white;
+}
