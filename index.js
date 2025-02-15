@@ -34,18 +34,6 @@ const sidebarNavArray = [
   "Favorite",
 ];
 
-const myLibrary = ["Hobbit", "Lord of The Rings", "Marvels Spiderman"];
-
-function Book(title, summary, author, pages, read) {
-  this.title = title;
-  this.summary = summary;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-function addBookToLibrary() {}
-
 let sidebarNav = "";
 for (let i = 0; i < sidebarNavArray.length; i++) {
   sidebarNav +=
@@ -60,3 +48,71 @@ for (let i = 0; i < sidebarNavArray.length; i++) {
 }
 
 document.querySelector("span").innerHTML = `${sidebarNav}`;
+
+const Hobbit = new Book(
+  "The Hobbit",
+  "The Hobbit is the unforgettable story of Bilbo, a peace-loving hobbit, who embarks on a strange and magical adventure.",
+  "J.R.R Tolkien",
+  368,
+  false
+);
+
+const newHobbit = new Book(
+  "The Hobby",
+  "The Hobbit is the unforgettable story of Bilbo, a peace-loving hobbit, who embarks on a strange and magical adventure.",
+  "J.R.R Tolkien",
+  368,
+  false
+);
+
+const myLibrary = [Hobbit, newHobbit];
+
+function Book(title, blurb, author, pages, read) {
+  this.title = title;
+  this.blurb = blurb;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+function addBookToLibrary() {
+  const addBook = new Book();
+}
+
+let cards = "";
+let idsOfCards = 0;
+
+function createCard() {
+  Object.values(myLibrary).forEach((value) => {
+    cards += `<div id="card">
+    <div id="title"><h1>${value.title}</h1></div>
+    <br />
+    <div id="blurb"><h3>Blurb:</h3> <p>${value.blurb}</p></div>
+    <br />
+    <div id="author"><h3>Author:</h3> <p>${value.author}</p></div>
+    <br />
+    <div id="pages"><h3>Pages:</h3> ${value.pages}</div>
+    <br />
+    <div id="status"><h3>Status:</h3> <p>${value.read}</p> </div>
+    <br />
+    <div id="btnCardContainer">
+    <button id="statusRead">Read</button>
+    <button id="${idsOfCards}" onclick="removeBook(event)">Remove</button>
+    </div>
+    </div>`;
+    for (let i = 0; i < myLibrary.length; i++) {
+      idsOfCards += i;
+    }
+  });
+}
+createCard();
+
+function removeBook(event) {
+  let idOfCard = event.target.id;
+  console.log(myLibrary);
+  myLibrary.splice(idOfCard, idOfCard + 1);
+  console.log(myLibrary);
+  createCard();
+}
+
+document.getElementById("cardContainer").innerHTML = cards;

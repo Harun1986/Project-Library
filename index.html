@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML + CSS</title>
+    <title>Odin Library</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -19,18 +19,33 @@
             <span> </span>
           </div>
         </sidebar>
-        <header></header>
-        <main>
-          <div id="card">
-            <div id="title"></div>
-            <div id="summary"></div>
-            <div id="author"></div>
-            <div id="pages"></div>
-            <div id="status"></div>
-          </div>
-        </main>
+        <div
+          id="cardContainer"
+          style="grid-template-columns: repeat(2, 300px)"
+        ></div>
+        <header>
+          <form action="#">
+            <h1>Add new Book</h1>
+            <label>Titel</label>
+            <input type="text" value="" />
+            <label>Blurb</label>
+            <textarea cols="10" name="Blurb" id="blurb"></textarea>
+            <label>Author</label>
+            <input type="text" value="" />
+            <label>Pages</label>
+            <input type="number" value="1" min="1" max="999" />
+            <br />
+            <span>
+              <input type="checkbox" value="true" /> <label>Read </label>
+              <input type="checkbox" value="false" /> <label>Not Read</label>
+            </span>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        </header>
+        <main></main>
       </div>
     </div>
   </body>
-  <script src="script.js"></script>
+  <script src="index.js"></script>
 </html>
