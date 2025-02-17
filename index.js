@@ -49,24 +49,6 @@ for (let i = 0; i < sidebarNavArray.length; i++) {
 
 document.querySelector("span").innerHTML = `${sidebarNav}`;
 
-const Hobbit = new Book(
-  "The Hobbit",
-  "The Hobbit is the unforgettable story of Bilbo, a peace-loving hobbit, who embarks on a strange and magical adventure.",
-  "J.R.R Tolkien",
-  368,
-  false
-);
-
-const newHobbit = new Book(
-  "The Hobby",
-  "The Hobbit is the unforgettable story of Bilbo, a peace-loving hobbit, who embarks on a strange and magical adventure.",
-  "J.R.R Tolkien",
-  368,
-  false
-);
-
-const myLibrary = [Hobbit, newHobbit];
-
 function Book(title, blurb, author, pages, read) {
   this.title = title;
   this.blurb = blurb;
@@ -75,44 +57,109 @@ function Book(title, blurb, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary() {
-  const addBook = new Book();
-}
+Book.prototype.toggleReadStatus = function () {
+  return `${(this.read = !this.read)}`;
+};
+
+const Hobbit = new Book(
+  "The Hobbit",
+  "The Hobbit is the unforgettable story of Bilbo, a peace-loving hobbit, who embarks on a strange and magical adventure.",
+  "J.R.R Tolkien",
+  368,
+  false
+);
+
+const myLibrary = [Hobbit];
 
 let cards = "";
-let idsOfCards = 0;
 
 function createCard() {
-  Object.values(myLibrary).forEach((value) => {
+  cards = "";
+  myLibrary.forEach((book, index) => {
     cards += `<div id="card">
-    <div id="title"><h1>${value.title}</h1></div>
+    <div id="title"><h1>${book.title}</h1></div>
     <br />
-    <div id="blurb"><h3>Blurb:</h3> <p>${value.blurb}</p></div>
+    <div id="blurb"><h3>Blurb:</h3> <p>${book.blurb}</p></div>
     <br />
-    <div id="author"><h3>Author:</h3> <p>${value.author}</p></div>
+    <div id="author"><h3>Author:</h3> <p>${book.author}</p></div>
     <br />
-    <div id="pages"><h3>Pages:</h3> ${value.pages}</div>
+    <div id="pages"><h3>Pages:</h3> ${book.pages}</div>
     <br />
-    <div id="status"><h3>Status:</h3> <p>${value.read}</p> </div>
+    <div id="status"><h3>Status:</h3> <p>${
+      book.read ? "Read" : "Not Read"
+    }</p> </div>
     <br />
     <div id="btnCardContainer">
-    <button id="statusRead">Read</button>
-    <button id="${idsOfCards}" onclick="removeBook(event)">Remove</button>
+    <button id="statusRead" onclick="toggleReadStatus(${index})">${
+      !book.read ? "Read" : "Not Read"
+    }</button>
+    <button id="${index}" onclick="removeBook(event)">Remove</button>
     </div>
     </div>`;
-    for (let i = 0; i < myLibrary.length; i++) {
-      idsOfCards += i;
-    }
+    document.getElementById(
+      "cardContainer"
+    ).style.gridTemplateColumns = `repeat(${myLibrary.length}, 300px)`;
   });
-}
-createCard();
 
-function removeBook(event) {
-  let idOfCard = event.target.id;
-  console.log(myLibrary);
-  myLibrary.splice(idOfCard, idOfCard + 1);
-  console.log(myLibrary);
+  document.getElementById("cardContainer").innerHTML = cards;
+}
+
+function toggleReadStatus(index) {
+  myLibrary[index].toggleReadStatus();
   createCard();
 }
 
-document.getElementById("cardContainer").innerHTML = cards;
+function removeBook(event) {
+  const idOfCard = event.target.id;
+  myLibrary.splice(idOfCard, 1);
+
+  createCard();
+}
+
+function creatInputField() {
+  document.querySelector("header").innerHTML = `
+            <form action="#">
+            <h1>Add new Book</h1>
+            <label>Titel</label>
+            <input type="text" value="" />
+            <label>Blurb</label>
+            <textarea cols="10" name="Blurb" id="blurb"></textarea>
+            <label>Author</label>
+            <input type="text" value="" />
+            <label>Pages</label>
+            <input type="number" value="1" min="1" max="999" />
+            <br />
+            <span>
+              <input type="checkbox" value="true" /> <label>Read </label>
+              <input type="checkbox" value="false" /> <label>Not Read</label>
+            </span>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+  `;
+}
+creatInputField();
+
+function addNewBook(event) {
+  event.preventDefault();
+  const title = document.querySelector("input[type='text']").value;
+  const blurb = document.querySelector("textarea[name='Blurb']").value;
+  const author = document.querySelector(
+    "input[type='text']:nth-of-type(2)"
+  ).value;
+  const pages = parseInt(document.querySelector("input[type='number']").value);
+  const read =
+    document.querySelector("input[type='checkbox']:checked").value === "true";
+
+  const addBookToMyLibrary = new Book(title, blurb, author, pages, read);
+  myLibrary.push(addBookToMyLibrary);
+
+  createCard();
+  document.querySelector("form").reset();
+}
+
+document
+  .querySelector('input[type="submit"]')
+  .addEventListener("click", addNewBook);
+
+createCard();
