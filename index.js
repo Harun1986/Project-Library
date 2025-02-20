@@ -98,28 +98,16 @@ function createCard() {
     </div>`;
     document.getElementById(
       "cardContainer"
-    ).style.gridTemplateColumns = `repeat(${myLibrary.length}, 300px)`;
+    ).style.gridTemplateColumns = `repeat(${1 ? myLibrary.length : 4}, 300px)`;
   });
 
   document.getElementById("cardContainer").innerHTML = cards;
 }
 
-function toggleReadStatus(index) {
-  myLibrary[index].toggleReadStatus();
-  createCard();
-}
-
-function removeBook(event) {
-  const idOfCard = event.target.id;
-  myLibrary.splice(idOfCard, 1);
-
-  createCard();
-}
-
 function creatInputField() {
-  document.querySelector("header").innerHTML = `
+  document.querySelector("#newBookContainer").innerHTML = `
             <form action="#">
-            <h1>Add new Book</h1>
+            <span><h1>Add new Book</h1><h3 id="closeNewBook" onclick="clicked(event)">X</h3></span>
             <label>Titel</label>
             <input type="text" value="" />
             <label>Blurb</label>
@@ -129,10 +117,10 @@ function creatInputField() {
             <label>Pages</label>
             <input type="number" value="1" min="1" max="999" />
             <br />
-            <span>
+            <div>
               <input type="checkbox" value="true" /> <label>Read </label>
               <input type="checkbox" value="false" /> <label>Not Read</label>
-            </span>
+            </div>
             <br />
             <input type="submit" value="Submit" />
           </form>
@@ -156,6 +144,7 @@ function addNewBook(event) {
 
   createCard();
   document.querySelector("form").reset();
+  document.getElementById("newBookContainer").style.display = "none";
 }
 
 document
@@ -163,3 +152,25 @@ document
   .addEventListener("click", addNewBook);
 
 createCard();
+
+function toggleReadStatus(index) {
+  myLibrary[index].toggleReadStatus();
+  createCard();
+}
+
+function removeBook(event) {
+  const idOfCard = event.target.id;
+  myLibrary.splice(idOfCard, 1);
+
+  createCard();
+}
+
+function clicked(event) {
+  let id = event.target.id;
+
+  if (id == "newBookInput") {
+    document.getElementById("newBookContainer").style.display = "grid";
+  } else if (id == "closeNewBook") {
+    document.getElementById("newBookContainer").style.display = "none";
+  }
+}

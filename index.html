@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Odin Library</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div id="app">
@@ -19,6 +19,11 @@
             <span> </span>
           </div>
         </sidebar>
+        <div id="newBookContainer" style="display: none"></div>
+        <div id="BooksTitleContainer"><h1>Books</h1></div>
+        <div id="newBookButtonContainer">
+          <button id="newBookInput" onclick="clicked(event)">Add Book</button>
+        </div>
         <div id="cardContainer"></div>
         <header></header>
         <main></main>
